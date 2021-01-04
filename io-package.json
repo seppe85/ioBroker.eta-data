@@ -1,0 +1,77 @@
+{
+	"common": {
+		"name": "eta-data",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "ETA Data",
+		"titleLang": {
+			"en": "ETA Data",
+			"de": "ETA Data",
+			"ru": "ETA Data",
+			"pt": "ETA Data",
+			"nl": "ETA Data",
+			"fr": "ETA Data",
+			"it": "ETA Data",
+			"es": "ETA Data",
+			"pl": "ETA Data",
+			"zh-cn": "ETA Data"
+		},
+		"desc": {
+			"en": "eta-data",
+			"de": "eta-data",
+			"ru": "eta-data",
+			"pt": "eta-data",
+			"nl": "eta-data",
+			"fr": "eta-data",
+			"it": "eta-data",
+			"es": "eta-data",
+			"pl": "eta-data",
+			"zh-cn": "eta-data"
+		},
+		"authors": [
+			"seppix85 <seppix@freenet.de>"
+		],
+		"keywords": [
+			"ETA",
+			"Pu"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "main.js",
+		"icon": "eta-data.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/seppe85/ioBroker.eta-data/master/admin/eta-data.png",
+		"readme": "https://github.com/seppe85/ioBroker.eta-data/blob/master/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "climate-control",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "poll",
+		"materialize": true,
+		"dependencies": [
+			{
+				"js-controller": ">=2.0.0"
+			}
+		]
+	},
+	"native": {
+		"option1": true,
+		"option2": "42"
+	},
+	"objects": [],
+	"instanceObjects": []
+}
