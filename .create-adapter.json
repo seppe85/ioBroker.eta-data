@@ -12,7 +12,7 @@
 	],
 	"adminFeatures": [],
 	"type": "climate-control",
-	"startMode": "daemon",
+	"startMode": "schedule",
 	"connectionType": "local",
 	"dataSource": "poll",
 	"connectionIndicator": "no",
