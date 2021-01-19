@@ -37,37 +37,22 @@ class EtaData extends utils.Adapter {
 		const nameVariableSet = "ioVarSet";
 		const ResultVariables = new Array();
 
-		// uri="/120/10101/0/0/12197" name="Außentemperatur"
-		// uri="/73/10221/0/0/12379" name="Leistung"
-		// uri="/73/10221/0/0/12349" name="Wärmemenge"
-		// uri="/73/10221/0/0/12350" name="Ertrag heute"
-		// uri="/73/10221/0/0/12769" name="Ertrag gestern"
-		// uri="/40/10021/0/0/12016" name="Gesamtverbrauch"
-		// uri="/40/10201/0/0/12015" name="Vorrat"
-		// uri="/40/10021/0/11109/0" name="Kessel"
-		// uri="/120/10601/0/0/13191" name="Puffer oben"
-		// uri="/120/10601/0/0/13192" name="Puffer unten"
-		// uri="/73/10221/0/11139/0" name="Kollektor"
-		// uri="/73/10221/0/0/12260" name="Solar Vorlauf"
-		// uri="/73/10221/0/0/12355" name="Solar Rücklauf"
-		// uri="/73/10221/12380/0/0" name="Durchfluss"
-		// uri="/120/10601/0/0/12528" name="Ladezustand"
 		const nameList = {
-			"120/10101/0/0/12197" : "Außentemperatur",
-			"73/10221/0/0/12379" : "Solar - Leistung",
-			"73/10221/0/0/12349" : "Solar - Wärmemenge",
-			"73/10221/0/0/12350" : "Solar - Ertrag heute",
-			"73/10221/0/0/12769" : "Solar - Ertrag gestern",
-			"40/10021/0/0/12016" : "Pellets - Gesamtverbrauch",
-			"40/10201/0/0/12015" : "Pellets - Vorrat",
-			"40/10021/0/11109/0" : "Kessel - Temperatur",
-			"120/10601/0/0/13191" : "Puffer - Temperatur oben",
-			"120/10601/0/0/13192" : "Puffer - Temperatur unten",
-			"73/10221/0/11139/0" : "Solar - Kollektor Temperatur",
-			"73/10221/0/0/12260" : "Solar - Vorlauf Temperatur",
-			"73/10221/0/0/12355" : "Solar - Rücklauf Temperatur",
-			"73/10221/12380/0/0" : "Solar - Durchfluss",
-			"120/10601/0/0/12528" : "Puffer - Ladezustand"
+			"120/10101/0/0/12197" : {id: "system.aussentemperatur", 	name: "Außentemperatur"	,				role: "value.temperature"},
+			"73/10221/0/0/12379" :  {id: "solar.leistung"		 , 		name: "Solar - Leistung",				role: "value"},
+			"73/10221/0/0/12349" : 	{id: "solar.waermemenge", 			name: "Solar - Wärmemenge",				role: "value"},
+			"73/10221/0/0/12350" : 	{id: "solar.ertrag.heute", 			name: "Solar - Ertrag heute",			role: "value"},
+			"73/10221/0/0/12769" : 	{id: "solar.ertrag.gestern", 		name: "Solar - Ertrag gestern",			role: "value"},
+			"40/10021/0/0/12016" : 	{id: "lager.gesamtverbrauch", 		name: "Pellets - Gesamtverbrauch",		role: "value"},
+			"40/10201/0/0/12015" : 	{id: "lager.vorrat", 				name: "Pellets - Vorrat",				role: "value"},
+			"40/10021/0/11109/0" : 	{id: "kessel.temperatur", 			name: "Kessel - Temperatur",				role: "value.temperature"},
+			"120/10601/0/0/13191" : {id: "puffer.temperatur.oben", 		name: "Puffer - Temperatur oben",		role: "value.temperature"},
+			"120/10601/0/0/13192" : {id: "puffer.temperatur.unten", 	name: "Puffer - Temperatur unten",		role: "value.temperature"},
+			"73/10221/0/11139/0" : 	{id: "solar.temperatur.kollektor",	name: "Solar - Kollektor Temperatur",	role: "value.temperature"},
+			"73/10221/0/0/12260" :	{id: "solar.temperatur.vorlauf", 	name: "Solar - Vorlauf Temperatur",		role: "value.temperature"},
+			"73/10221/0/0/12355" : 	{id: "solar.temperatur.ruecklauf", 	name: "Solar - Rücklauf Temperatur",		role: "value.temperature"},
+			"73/10221/12380/0/0" : 	{id: "solar.durchfluss", 			name: "Solar - Durchfluss",				role: "value"},
+			"120/10601/0/0/12528": 	{id: "puffer.ladezustand", 			name: "Puffer - Ladezustand",			role: "value"}
 		};
 
 		// The adapters config (in the instance object everything under the attribute "native") is accessible via
@@ -181,16 +166,15 @@ class EtaData extends utils.Adapter {
 						for (const variable of variableObject.eta.vars.variable) {
 
 							ResultVariables.push(variable);
-
-							this.setObject(variable.uri, {
+							await this.setObjectAsync(nameList[variable.uri].id, {
 								type: "state",
 								common: {
-									name: nameList[variable.uri],
+									name: nameList[variable.uri].name,
 									type: "number",
-									role: "value",
+									role: nameList[variable.uri].role,
 									unit: variable.unit,
 									read: true,
-									write: true
+									write: false
 								},
 								native: {},
 							});
@@ -215,7 +199,7 @@ class EtaData extends utils.Adapter {
 		}
 
 		ResultVariables.forEach(element => {
-			this.setState(element.uri, { val: element.strValue, ack: true });
+			this.setState(nameList[element.uri].id, { val: Number(element.strValue.replace(",",".")), ack: true });
 		});
 
 		this.killTimeout = setTimeout(this.terminate.bind(this), 20000); // stop adapter after 20 secs

@@ -1,45 +1,25 @@
 {
 	"common": {
 		"name": "eta-data",
-		"version": "0.0.1",
+		"version": "0.0.2",
 		"news": {
 			"0.0.1": {
+				"en": "initial test",
+				"de": "Erster Versuch"
+			},
+			"0.0.2": {
 				"en": "initial release",
-				"de": "Erstveröffentlichung",
-				"ru": "Начальная версия",
-				"pt": "lançamento inicial",
-				"nl": "Eerste uitgave",
-				"fr": "Première version",
-				"it": "Versione iniziale",
-				"es": "Versión inicial",
-				"pl": "Pierwsze wydanie",
-				"zh-cn": "首次出版"
+				"de": "Erstes Release"
 			}
 		},
 		"title": "ETA Data",
 		"titleLang": {
 			"en": "ETA Data",
-			"de": "ETA Data",
-			"ru": "ETA Data",
-			"pt": "ETA Data",
-			"nl": "ETA Data",
-			"fr": "ETA Data",
-			"it": "ETA Data",
-			"es": "ETA Data",
-			"pl": "ETA Data",
-			"zh-cn": "ETA Data"
+			"de": "ETA Data"
 		},
 		"desc": {
 			"en": "eta-data",
-			"de": "eta-data",
-			"ru": "eta-data",
-			"pt": "eta-data",
-			"nl": "eta-data",
-			"fr": "eta-data",
-			"it": "eta-data",
-			"es": "eta-data",
-			"pl": "eta-data",
-			"zh-cn": "eta-data"
+			"de": "eta-data"
 		},
 		"authors": [
 			"seppix85 <seppix@freenet.de>"
